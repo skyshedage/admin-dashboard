@@ -1,12 +1,12 @@
 import {
-  Tab,
+  
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
-  Card,
-  Box,
+  
+  
   Typography,
   TableContainer,
   Paper,
@@ -75,13 +75,13 @@ const MonthlyPlasticTable = () => {
             <TableBody>
               {montlydata.map((data) => {
                 return (
-                  <TableRow>
+                  <TableRow key={data.month}>
                     <TableCell>
                       <Typography variant="body1">{data.month}</Typography>
                     </TableCell>
-                    {Object.entries(data.totalCollection).map(
-                      ([type, count]) => {
-                        return <TableCell key={type}>{count}</TableCell>;
+                    {["HDPE", "LDPE", "PET", "PP", "PS", "PVC", "Others"].map(
+                      (type) => {
+                        return <TableCell key={type}>{data.totalCollection[type] ?? 0}</TableCell>;
                       }
                     )}
                   </TableRow>
@@ -89,7 +89,7 @@ const MonthlyPlasticTable = () => {
               })}
             </TableBody>
           ) : (
-            <Typography>Data is Fetching</Typography>
+            <TableBody><TableRow><TableCell colSpan={8}>Data is fetching</TableCell></TableRow></TableBody>
           )}
         </Table>
       </TableContainer>

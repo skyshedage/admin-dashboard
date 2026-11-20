@@ -1,15 +1,15 @@
-import { Avatar, Card, Stack, Typography, useMediaQuery } from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import { Avatar, Card, Stack, Typography } from "@mui/material";
+
 
 const TotalPlasticCard = ({ type, count, shortform, image }) => {
-  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+
   return (
     <Card
       sx={{
         padding: 2,
-        width: isSmallScreen ? "100%" : 350,
-        marginBottom: 1,
-        marginRight: 2,
+        width: "100%",
+        height: "100%",
+
       }}
     >
       <Stack spacing={1}>

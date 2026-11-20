@@ -1,7 +1,7 @@
-import React from "react";
-import Avatar from "@mui/material/Avatar";
+
+
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
+
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 export const TeamSection = ({ name, regno }) => {

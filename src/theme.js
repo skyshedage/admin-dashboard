@@ -1,4 +1,4 @@
-import { createTheme, inputLabelClasses, paperClasses } from "@mui/material";
+import { createTheme, inputLabelClasses} from "@mui/material";
 const CustomTheme = () => {
   return createTheme({
     palette: {

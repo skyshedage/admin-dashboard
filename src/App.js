@@ -8,45 +8,43 @@ import {
   Drawer,
   IconButton,
   ButtonBase,
-  Toolbar,
-  Divider,
-  Button,
-  Menu,
-  MenuItem,
-  useMediaQuery,
+  
+  
+  
+  
+  
   alpha,
-  Avatar,
-  Card,
+  
+  
 } from "@mui/material";
 import dayjs from "dayjs";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DateField } from "@mui/x-date-pickers/DateField";
+
 import { useLocation } from "react-router-dom";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
-import { useEffect, useState, lazy, Suspense } from "react";
+import { useState } from "react";
 import {
-  HiOutlineAcademicCap,
+  
   HiOutlineBars3,
-  HiUserCircle,
+  
 } from "react-icons/hi2";
 import { useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
-import { RiArrowDropDownFill } from "react-icons/ri";
-import { TbLogout2 } from "react-icons/tb";
-import axios from "axios";
+
+
+
 import { useContext } from "react";
 import { UserContext } from "./store/usercontext";
-import { FaBuilding, FaBriefcase } from "react-icons/fa";
+
 import HomePage from "./scenes/homePage";
 import { DatePicker } from "@mui/x-date-pickers";
-import moment from "moment-timezone";
+
 import icon from "./assest/icon-01.svg";
 function App() {
-  const isUserlogin = localStorage.getItem("token");
   const activepath = useLocation().pathname;
   const theme = useTheme();
   const [ismobilescreen, setmobilescreen] = useState(false);
@@ -59,24 +57,21 @@ function App() {
   dayjs.extend(utc);
   dayjs.extend(timezone);
   const [hoverdrawer, sethoverdrawer] = useState(false);
-  const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
-  const [openinterviewDialog, setopeninterviewDialog] = useState(false);
-  const [openreviewDialog, setopenreviewDialog] = useState(false);
-  const [openloginDialog, setopenloginDialog] = useState(false);
-  const handleReviewDialog = () => setopenreviewDialog(!openreviewDialog);
 
   const { state, dispatch } = useContext(UserContext);
   const handleStartDateChange = (date) => {
+    if (!date || !date.isValid()) return;
     dispatch({
       type: "UPDATE_DATES",
-      payload: { startDate: date, endDate: state.endDate },
+      payload: { startDate: date.toISOString(), endDate: state.endDate },
     });
   };
 
   const handleEndDateChange = (date) => {
+    if (!date || !date.isValid()) return;
     dispatch({
       type: "UPDATE_DATES",
-      payload: { startDate: state.startDate, endDate: date },
+      payload: { startDate: state.startDate, endDate: date.toISOString() },
     });
   };
 
@@ -97,6 +92,7 @@ function App() {
       {/* <Divider color="white" mt={2} /> */}
       <Stack spacing={4} mt={2} width={"100%"} alignContent={"center"}>
         <img
+          alt="Plastic collection dashboard"
           src={icon}
           height={"57px"}
           width={"57px"}
@@ -164,6 +160,7 @@ function App() {
         position="fixed"
         sx={{
           width: {
+            xs: "100%",
             md: `calc(100% - ${hoverdrawer ? drawerWidth : minidrawerWidth}px)`,
           },
           ml: { md: `${hoverdrawer ? drawerWidth : minidrawerWidth}px` },
@@ -203,9 +200,10 @@ function App() {
                     backgroundColor: "white",
                     padding: 0,
                     margin: 0,
-                    width: 180,
+                    width: { xs: 118, sm: 180 },
                   }}
-                  defaultValue={dayjs("2023-01-12")}
+                  label="Start date"
+                  value={dayjs(state.startDate)}
                   onChange={handleStartDateChange}
                   timezone="Asia/Kolkata"
                 />
@@ -213,9 +211,10 @@ function App() {
                   sx={{
                     backgroundColor: "white",
                     padding: 0,
-                    width: 180,
+                    width: { xs: 118, sm: 180 },
                   }}
-                  defaultValue={dayjs("2024-01-01")}
+                  label="End date"
+                  value={dayjs(state.endDate)}
                   onChange={handleEndDateChange}
                   timezone="Asia/Kolkata"
                 />
@@ -290,12 +289,14 @@ function App() {
       <Box
         sx={{
           flexGrow: 1,
+          minWidth: 0,
           backgroundColor: "#f0f8ff",
           paddingBlock: 4,
           paddingInline: 2,
           mt: 7,
           mx: 0.5,
           width: {
+            xs: "100%",
             md: `calc(100% - ${hoverdrawer ? drawerWidth : minidrawerWidth}px)`,
           },
           transition: theme.transitions.create("width", {

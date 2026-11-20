@@ -1,4 +1,4 @@
-import { ButtonBase, Card, Stack, Typography } from "@mui/material";
+import { ButtonBase, Card,  Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import educationImage from "../assest/edu.png";
 const EducationCardSection = () => {

@@ -1,16 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import {
   Box,
-  Button,
-  ButtonBase,
+  
+  
   Card,
-  Grid,
-  Stack,
-  Toolbar,
+  
+  
+  
   Typography,
-  useColorScheme,
-  useMediaQuery,
-  useTheme,
+  
+
 } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import TotalPlasticCard from "../component/TotalPlasticCard";
@@ -27,11 +26,10 @@ import pvcImage from "../assest/pvc.png";
 import axios from "axios";
 import { UserContext } from "../store/usercontext";
 import { TeamSection } from "../component/teamsection";
-import image1 from "../assest/boy.png";
-import image2 from "../assest/man (1).png";
-import image3 from "../assest/man.png";
+
+
+
 const HomePage = () => {
-  const theme = useTheme();
   const plasticTypes = [
     { type: "Polyethylene Terephthalate", shortform: "PET", image: petImage },
     { type: "High-Density Polyethylene", shortform: "HDPE", image: hdpeImage },
@@ -41,11 +39,10 @@ const HomePage = () => {
     { type: "Polystyrene", shortform: "PS", image: psImage },
     // { type: "Other", shortform: "Other", image: null },
   ];
-  const [isloading, setLoading] = useState(false);
   const [plasticCounts, setPlasticCounts] = useState({});
   const { state } = useContext(UserContext);
   const { startDate, endDate } = state;
-  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+
   useEffect(() => {
     axios
       .post(
@@ -57,7 +54,6 @@ const HomePage = () => {
       )
       .then((response) => {
         setPlasticCounts(response.data);
-        setLoading(true);
       })
       .catch((error) => console.log(error.message));
   }, [startDate, endDate]);
@@ -65,16 +61,16 @@ const HomePage = () => {
     <Box>
       <Box
         sx={{
-          display: "flex",
-          overflowX: isSmallScreen ? "hidden" : "auto",
-          flexDirection: isSmallScreen ? "column" : "row",
+          display: "grid",
+          gridTemplateColumns: { xs: "1fr", sm: "repeat(2, minmax(0, 1fr))", lg: "repeat(3, minmax(0, 1fr))" },
+          gap: 2,
           marginBottom: 2,
         }}
       >
         {plasticTypes.map((plasticType) => (
           <Box
             key={plasticType.shortform}
-            sx={{ marginBottom: isSmallScreen ? 2 : 0 }}
+            sx={{ minWidth: 0 }}
           >
             <TotalPlasticCard
               count={plasticCounts[plasticType.shortform]}
