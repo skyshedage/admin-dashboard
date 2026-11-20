@@ -1,13 +1,12 @@
-import { Card, Typography, Box } from "@mui/material";
+import { Card,  Box } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { LineChart } from "@mui/x-charts";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import moment from "moment";
-import dayjs from "dayjs";
+
 import { UserContext } from "../store/usercontext";
 const DailyPlasticChart = () => {
-  const [dailyData, setDailyData] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [xAxisData, setxAxisData] = useState();
   const [HDPE, setHDPE] = useState();
@@ -32,7 +31,6 @@ const DailyPlasticChart = () => {
       )
       .then((response) => {
         const data = response.data.records;
-        setDailyData(data);
         const dates = data.map((entry) => {
           return new Date(entry.date);
         });
