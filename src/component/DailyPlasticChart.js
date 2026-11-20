@@ -1,4 +1,4 @@
-import { Card,  Box } from "@mui/material";
+import { Card, Box, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { LineChart } from "@mui/x-charts";
 import { useContext, useEffect, useState } from "react";
@@ -54,6 +54,7 @@ const DailyPlasticChart = () => {
     <Grid2 xs={12} sm={12} lg={9}>
       <Box sx={{ overflowX: "auto" }}>
         <Card>
+          <Typography variant="h3" sx={{ px: 2, pt: 2 }}>Daily plastic collection</Typography>
           {!isLoading && HDPE && LDPE && PET && PP && PS && PVC && Others && (
             <LineChart
               // margin={1}
@@ -79,13 +80,17 @@ const DailyPlasticChart = () => {
               ]}
               slotProps={{
                 legend: {
-                  hidden: true,
+                  hidden: false,
                   direction: "row",
                   position: { vertical: "top", horizontal: "middle" },
-                  padding: 24,
+                  padding: 12,
+                  itemMarkWidth: 10,
+                  itemMarkHeight: 10,
+                  itemGap: 8,
                 },
               }}
-              height={300}
+              margin={{ top: 100, right: 20, bottom: 40, left: 40 }}
+              height={360}
             />
           )}
         </Card>
