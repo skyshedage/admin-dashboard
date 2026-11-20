@@ -8,7 +8,7 @@ const ContinentWiseContribution = () => {
       <Card
         sx={{
           padding: 2,
-          height: "350px",
+          minHeight: "350px",
         }}
       >
         <Typography variant="h3">Illustrative plastic-waste distribution</Typography>
@@ -27,12 +27,14 @@ const ContinentWiseContribution = () => {
                 { id: 5, value: 1, label: "Australia" },
               ],
               innerRadius: 30,
-              outerRadius: 100,
+              outerRadius: 75,
               paddingAngle: 5,
               cornerRadius: 5,
             },
           ]}
-          height={200}
+          margin={{ top: 10, bottom: 105, left: 10, right: 10 }}
+          slotProps={{ legend: { direction: "row", position: { vertical: "bottom", horizontal: "middle" }, itemMarkWidth: 10, itemMarkHeight: 10, itemGap: 12, padding: 6 } }}
+          height={290}
         />
       </Card>
     </Grid2>
