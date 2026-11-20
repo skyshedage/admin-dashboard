@@ -9,7 +9,7 @@ import {
   
   Typography,
   
-  useMediaQuery,
+
 } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import TotalPlasticCard from "../component/TotalPlasticCard";
@@ -42,7 +42,7 @@ const HomePage = () => {
   const [plasticCounts, setPlasticCounts] = useState({});
   const { state } = useContext(UserContext);
   const { startDate, endDate } = state;
-  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+
   useEffect(() => {
     axios
       .post(
@@ -61,16 +61,16 @@ const HomePage = () => {
     <Box>
       <Box
         sx={{
-          display: "flex",
-          overflowX: isSmallScreen ? "hidden" : "auto",
-          flexDirection: isSmallScreen ? "column" : "row",
+          display: "grid",
+          gridTemplateColumns: { xs: "1fr", sm: "repeat(2, minmax(0, 1fr))", lg: "repeat(3, minmax(0, 1fr))" },
+          gap: 2,
           marginBottom: 2,
         }}
       >
         {plasticTypes.map((plasticType) => (
           <Box
             key={plasticType.shortform}
-            sx={{ marginBottom: isSmallScreen ? 2 : 0 }}
+            sx={{ minWidth: 0 }}
           >
             <TotalPlasticCard
               count={plasticCounts[plasticType.shortform]}
